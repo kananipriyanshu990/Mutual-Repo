@@ -1,0 +1,159 @@
+.sticker-card {
+  width: 250px;
+  height: 300px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  outline: none;
+}
+
+.sticker-card:focus-visible {
+  outline: 2px solid #7dd3c0;
+  outline-offset: 4px;
+}
+
+.sticker-card.expanding {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  border-radius: 0;
+  animation: expandSticker 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+.sticker-grid.animating .sticker-card:not(.expanding) {
+  pointer-events: none;
+}
+
+.main-container.animating {
+  pointer-events: none;
+}
+
+.main-container.animating .sticker-grid {
+  pointer-events: auto;
+}
+
+.main-container.animating .sticker-card.expanding {
+  pointer-events: none;
+}
+
+@keyframes expandSticker {
+  0% {
+    transform: scale(1) translateY(-8px);
+    border-radius: 12px;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    border-radius: 0;
+  }
+}
+
+.expanded-view.collapsing {
+  animation: collapseSticker 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes collapseSticker {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+.sticker-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.smiling-mind-logo {
+  color: #000;
+}
+
+.mass-logo {
+  color: #fff;
+}
+
+.soccer-logo {
+  color: #fff;
+}
+
+.fenton-logo {
+  color: #000;
+}
+
+.logo-placeholder {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* Specific project styling */
+.sticker-card.smiling-mind {
+  background-color: #f5f5f5;
+}
+
+.sticker-card.mass-studio {
+  background-color: #2a2a2a;
+}
+
+.sticker-card.soccer-tool {
+  background-color: #7dd3c0;
+}
+
+.sticker-card.fenton {
+  background-color: #f4e04d;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .sticker-card {
+    width: 200px;
+    height: 240px;
+  }
+  
+  .sticker-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sticker-card {
+    width: 150px;
+    height: 180px;
+  }
+  
+  .sticker-content {
+    padding: 1rem;
+  }
+  
+  .logo svg {
+    width: 80px;
+    height: 40px;
+  }
+  
+  .fenton-logo text {
+    font-size: 18px;
+  }
+}

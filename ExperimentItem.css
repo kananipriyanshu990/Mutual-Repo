@@ -1,0 +1,96 @@
+.experiment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+  border-radius: 8px;
+}
+
+.experiment-item:focus-visible {
+  outline: 2px solid #7dd3c0;
+  outline-offset: 2px;
+}
+
+.experiment-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.experiment-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.gt-sport-icon {
+  background: rgba(255, 107, 53, 0.2);
+}
+
+.yarnghetti-icon {
+  background: rgba(78, 205, 196, 0.2);
+}
+
+.emerald-hill-icon {
+  background: rgba(69, 183, 209, 0.2);
+}
+
+.default-icon .icon-placeholder {
+  width: 24px;
+  height: 24px;
+  background: #666;
+  border-radius: 4px;
+}
+
+.experiment-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.experiment-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.experiment-description {
+  font-size: 0.95rem;
+  color: #cccccc;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .experiment-item {
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  
+  .experiment-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .experiment-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .experiment-title {
+    font-size: 1rem;
+  }
+  
+  .experiment-description {
+    font-size: 0.9rem;
+  }
+}

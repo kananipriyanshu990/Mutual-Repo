@@ -1,0 +1,8 @@
+.experiments-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.experiments-list .experiment-item:last-child {
+  border-bottom: none;
+}

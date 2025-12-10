@@ -1,0 +1,20 @@
+.main-container {
+  min-height: 100vh;
+  background-color: #242424;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 0 1rem;
+  }
+}
