@@ -29,7 +29,7 @@ const StickerCard: React.FC<StickerCardProps> = ({ project, onClick }) => {
         return (
           <div className="logo mass-logo">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-              <circle cx="40" cy="40" r="30" fill="#ffffff" opacity="0.8"/>
+              <circle cx="40" cy="40" r="30" fill="#E2CB39" opacity="0.8"/>
               <text x="40" y="45" textAnchor="middle" fill="#000" fontSize="12" fontWeight="bold">
                 MASS
               </text>
@@ -82,5 +82,6 @@ const StickerCard: React.FC<StickerCardProps> = ({ project, onClick }) => {
     </motion.div>
   );
 };
+
 
 export default StickerCard;
