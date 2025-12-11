@@ -1,673 +1,880 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mutual Funds - Introduction</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background-color: #242424;
-            color: #ffffff;
-            line-height: 1.5;
-            min-height: 100vh;
-        }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          sans-serif;
+        background-color: #242424;
+        color: #ffffff;
+        line-height: 1.5;
+        min-height: 100vh;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
 
-        /* Header Styles */
-        .header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
+      /* Header Styles */
+      .header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
 
+      .developer-name {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #ffffff;
+      }
+
+      .tagline {
+        font-size: 1.2rem;
+        color: #cccccc;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .social-icon {
+        background: none;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 0.75rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        color: #7dd3c0;
+        transform: translateY(-2px);
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Work Section */
+      .work-section {
+        margin-bottom: 4rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: #ffffff;
+      }
+
+      .sticker-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        justify-items: center;
+        margin-bottom: 4rem;
+      }
+
+      .sticker-card {
+        width: 250px;
+        height: 300px;
+        border-radius: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .sticker-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Expansion Animation */
+      .sticker-card.expanding {
+        position: fixed;
+        z-index: 1000;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0);
+        box-shadow: none;
+      }
+
+      /* Hide content during animation */
+      .container.animating {
+        pointer-events: none;
+      }
+
+      .container.animating .sticker-card:not(.expanding) {
+        opacity: 0.3;
+      }
+
+      .smiling-mind {
+        background-color: #f5f5f5;
+        color: #000;
+      }
+
+      .mass-studio {
+        background-color: cyan;
+        color: #000;
+      }
+
+      .soccer-tool {
+        background-color: #7dd3c0;
+        color: #000;
+      }
+
+      .fenton {
+        background-color: #f4e04d;
+        color: #000;
+      }
+
+      /* Experiments Section */
+      .experiments-section {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .experiment-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .experiment-item:hover {
+        transform: translateX(8px);
+      }
+
+      .experiment-item:hover .experiment-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .experiment-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .gt-sport-icon {
+        background: rgb(30, 213, 45);
+      }
+
+      .yarnghetti-icon {
+        background: rgb(226, 163, 27);
+      }
+
+      .emerald-hill-icon {
+        background: rgb(226, 107, 27);
+      }
+
+      .experiment-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: #ffffff;
+      }
+
+      .experiment-content p {
+        color: #cccccc;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      /* Expanded View */
+      .expanded-view {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1000;
+        padding: 2rem;
+        overflow-y: auto;
+        display: none;
+      }
+
+      .expanded-view.active {
+        display: block;
+      }
+
+      .back-arrow {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        background: rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        color: #333;
+        font-size: 1.5rem;
+      }
+
+      .back-arrow:hover {
+        background: rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
+      }
+
+      .expanded-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 4rem;
+        min-height: calc(100vh - 4rem);
+        align-items: center;
+      }
+
+      .project-info {
+        padding: 2rem;
+      }
+
+      .project-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #333;
+      }
+
+      .project-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        color: #555;
+      }
+
+      .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .tech-tag {
+        background: rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      .project-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 400px;
+        font-size: 2rem;
+        color: #666;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .developer-name {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            color: #cccccc;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .social-icon {
-            background: none;
-            border: none;
-            color: #ffffff;
-            cursor: pointer;
-            padding: 0.75rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            color: #7dd3c0;
-            transform: translateY(-2px);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Work Section */
-        .work-section {
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #ffffff;
-        }
-
-        .sticker-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            justify-items: center;
-            margin-bottom: 4rem;
+          font-size: 2.5rem;
         }
 
         .sticker-card {
-            width: 250px;
-            height: 300px;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sticker-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .smiling-mind {
-            background-color: #f5f5f5;
-            color: #000;
-        }
-
-        .mass-studio {
-            background-color: #2a2a2a;
-            color: #fff;
-        }
-
-        .soccer-tool {
-            background-color: #7dd3c0;
-            color: #000;
-        }
-
-        .fenton {
-            background-color: #f4e04d;
-            color: #000;
-        }
-
-        /* Experiments Section */
-        .experiments-section {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .experiment-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .experiment-item:hover {
-            transform: translateX(8px);
-        }
-
-        .experiment-item:hover .experiment-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .experiment-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .gt-sport-icon {
-            background: rgba(255, 107, 53, 0.2);
-        }
-
-        .yarnghetti-icon {
-            background: rgba(78, 205, 196, 0.2);
-        }
-
-        .emerald-hill-icon {
-            background: rgba(69, 183, 209, 0.2);
-        }
-
-        .experiment-content h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .experiment-content p {
-            color: #cccccc;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* Expanded View */
-        .expanded-view {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1000;
-            padding: 2rem;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .expanded-view.active {
-            display: block;
-        }
-
-        .back-arrow {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            background: rgba(0, 0, 0, 0.1);
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            color: #333;
-            font-size: 1.5rem;
-        }
-
-        .back-arrow:hover {
-            background: rgba(0, 0, 0, 0.2);
-            transform: scale(1.1);
+          width: 200px;
+          height: 240px;
         }
 
         .expanded-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 4rem;
-            min-height: calc(100vh - 4rem);
-            align-items: center;
-        }
-
-        .project-info {
-            padding: 2rem;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          padding-top: 6rem;
         }
 
         .project-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: #333;
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .sticker-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
         }
 
-        .project-description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            color: #555;
+        .sticker-card {
+          width: 150px;
+          height: 180px;
+          font-size: 1rem;
         }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .tech-tag {
-            background: rgba(0, 0, 0, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: #333;
-        }
-
-        .project-visual {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 400px;
-            font-size: 2rem;
-            color: #666;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .developer-name {
-                font-size: 2.5rem;
-            }
-
-            .sticker-card {
-                width: 200px;
-                height: 240px;
-            }
-
-            .expanded-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding-top: 6rem;
-            }
-
-            .project-title {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sticker-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .sticker-card {
-                width: 150px;
-                height: 180px;
-                font-size: 1rem;
-            }
-        }
+      }
     </style>
     <script src="https://unpkg.com/lucide@latest"></script>
-
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1 class="developer-name">Start Early - Even if Small</h1>
-            <p class="tagline">
-                Mutual funds are a great way for people with regular income to build wealth. The most crucial component here is TIME!
-                <br> 
+      <!-- Header -->
+      <header class="header">
+        <h1 class="developer-name">Start Early - Even if Small</h1>
+        <p class="tagline">
+          Mutual funds are a great way for people with regular income to build
+          wealth. The most crucial component here is TIME!
+          <br />
+        </p>
+
+        <div class="social-links">
+          <button
+            class="social-icon"
+            onclick="openLink('www.linkedin.com/in/priyanshu-kanani')"
+            title="LinkedIn"
+          >
+            <div class="icon-linkedin"></div>
+            <script>
+              import { createIcons, linkedin } from "lucide";
+
+              createIcons({
+                icons: {
+                  linkedin,
+                },
+              });
+            </script>
+
+            <i
+              data-lucide="linkedin"
+              style="color: cyan; width: 40px; height: 40px"
+            ></i>
+          </button>
+          <button
+            class="social-icon"
+            onclick="openLink('mailto:kananipriyanshu80@gmail.com')"
+            title="Email"
+          >
+            <script>
+              import { createIcons, mail } from "lucide";
+
+              createIcons({
+                icons: {
+                  mail,
+                },
+              });
+            </script>
+
+            <i
+              data-lucide="mail"
+              style="color: orange; width: 40px; height: 40px"
+            ></i>
+          </button>
+          <button
+            class="social-icon"
+            onclick="openLink('https://github.com/kananipriyanshu990')"
+            title="GitHub"
+          >
+            <script>
+              import { createIcons, github } from "lucide";
+
+              createIcons({
+                icons: {
+                  github,
+                },
+              });
+            </script>
+
+            <i
+              data-lucide="github"
+              style="color: magenta; width: 40px; height: 40px"
+            ></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Work Section -->
+      <section class="work-section">
+        <h2 class="section-title">Mutual Fund Types</h2>
+        <div class="sticker-grid">
+          <div
+            class="sticker-card smiling-mind"
+            onclick="expandProject('smiling-mind')"
+          >
+            Power of Compounding
+          </div>
+          <div
+            class="sticker-card mass-studio"
+            onclick="expandProject('mass-studio')"
+          >
+            Lower Financial Pressure Later in Life
+          </div>
+          <div
+            class="sticker-card soccer-tool"
+            onclick="expandProject('soccer-tool')"
+          >
+            Professional Fund Management
+          </div>
+          <div class="sticker-card fenton" onclick="expandProject('fenton')">
+            Diversification Reduces Risk
+          </div>
+        </div>
+      </section>
+
+      <!-- Experiments Section -->
+      <section class="experiments-section">
+        <h2 class="section-title">Mutual Fund Types</h2>
+
+        <div
+          class="experiment-item"
+          onclick="openLink('https://groww.in/mutual-funds/equity-funds')"
+        >
+          <div class="experiment-icon gt-sport-icon">
+            <script>
+              import { createIcons, coins } from "lucide";
+
+              createIcons({
+                icons: {
+                  coins,
+                },
+              });
+            </script>
+
+            <i
+              data-lucide="coins"
+              style="color: pink; width: 30px; height: 30px"
+            ></i>
+          </div>
+          <div class="experiment-content">
+            <h3>Equity Mutual Funds</h3>
+            <p>
+              Invest mainly in stocks of companies
+              <br />
+              Higher risk, higher long-term returns
+              <br />
+              Best for long-term wealth creation (5+ years)
+              <br />
+              Types: Large-cap, Mid-cap, Small-cap, Multi-cap, ELSS (tax saving)
             </p>
-            
-            <div class="social-links">
-                <button class="social-icon" onclick="openLink('https://www.linkedin.com/in/priyanshu-kanani/')" title="LinkedIn">
-                   <div class="icon-linkedin"></div>
-                   <script>
-                        import { createIcons, linkedin } from 'lucide';
+          </div>
+        </div>
 
-                        createIcons({
-                        icons: {
-                            linkedin
-                        }
-                        });
-                        </script>
+        <div
+          class="experiment-item"
+          onclick="openLink('https://groww.in/mutual-funds/debt-funds')"
+        >
+          <div class="experiment-icon yarnghetti-icon">
+            <script>
+              import { createIcons, handCoins } from "lucide";
 
-                        <i data-lucide="linkedin" style="color: cyan; width: 40px; height: 40px;"></i>  
-                </button>
-                <button class="social-icon" onclick="openLink('mailto:kananipriyanshu80@gmail.com')" title="Email">
-                    <script>
-                        import { createIcons, mail } from 'lucide';
+              createIcons({
+                icons: {
+                  handCoins,
+                },
+              });
+            </script>
 
-                        createIcons({
-                        icons: {
-                            mail
-                        }
-                        });
-                        </script>
+            <i
+              data-lucide="hand-coins"
+              style="color: rgb(213, 52, 52); width: 30px; height: 30px"
+            ></i>
+          </div>
+          <div class="experiment-content">
+            <h3>Debt Mutual Funds</h3>
+            <p>
+              Invest in government bonds, corporate bonds, treasury bills, etc.
+              <br />
+              Lower risk, more stable than equity
+              <br />
+              Good for short-term goals, emergency funds, stability
+            </p>
+          </div>
+        </div>
 
-                        <i data-lucide="mail" style="color: orange; width: 40px; height: 40px;"></i>  
-                </button>
-                <button class="social-icon" onclick="openLink('https://github.com/kananipriyanshu990')" title="GitHub">
-                    <script>
-                        import { createIcons, github } from 'lucide';
+        <div
+          class="experiment-item"
+          onclick="openLink('https://groww.in/mutual-funds/other-schemes/index-funds')"
+        >
+          <div class="experiment-icon emerald-hill-icon">
+            <script>
+              import { createIcons, banknoteArrowUp } from "lucide";
 
-                        createIcons({
-                        icons: {
-                            github
-                        }
-                        });
-                        </script>
+              createIcons({
+                icons: {
+                  banknoteArrowUp,
+                },
+              });
+            </script>
 
-                        <i data-lucide="github" style="color: magenta; width: 40px; height: 40px;"></i>  
-                </button>
-            </div>
-        </header>
-
-        <!-- Work Section -->
-        <section class="work-section">
-            <h2 class="section-title">Benefits</h2>
-            <div class="sticker-grid">
-                <div class="sticker-card smiling-mind" onclick="expandProject('smiling-mind')">
-                    Power of Compounding 
-                </div>
-                <div class="sticker-card mass-studio" onclick="expandProject('mass-studio')">
-                    Lower Financial Pressure Later in Life
-                </div>
-                <div class="sticker-card soccer-tool" onclick="expandProject('soccer-tool')">
-                    Professional Fund Management 
-                </div>
-                <div class="sticker-card fenton" onclick="expandProject('fenton')">
-                    Diversification Reduces Risk
-                </div>
-            </div>
-        </section>
-
-        <!-- Experiments Section -->
-        <section class="experiments-section">
-            <h2 class="section-title">Some Types of Mutual Funds</h2>
-            
-            <div class="experiment-item" onclick="openLink('https://groww.in/mutual-funds/equity-funds')">
-                <div class="experiment-icon gt-sport-icon">
-                    <script>
-                        import { createIcons, coins } from 'lucide';
-
-                        createIcons({
-                        icons: {
-                            coins
-                        }
-                        });
-                        </script>
-
-                        <i data-lucide="coins" style="color: pink; width: 30px; height: 30px;"></i>  
-                </div>
-                <div class="experiment-content">
-                    <h3>Equity Mutual Funds</h3>
-                    <p>Invest mainly in stocks of companies
-                        <br>
-                        Higher risk, higher long-term returns
-                        <br>
-                        Best for long-term wealth creation (5+ years)
-                        <br>
-                        Types: Large-cap, Mid-cap, Small-cap, Multi-cap, ELSS (tax saving)</p>
-                </div>
-            </div>
-
-            <div class="experiment-item" onclick="openLink('https://groww.in/mutual-funds/debt-funds')">
-                <div class="experiment-icon yarnghetti-icon">
-                    <script>
-                        import { createIcons, handCoins } from 'lucide';
-
-                        createIcons({
-                        icons: {
-                            handCoins
-                        }
-                        });
-                        </script>
-
-                        <i data-lucide="hand-coins" style="color: rgb(213, 52, 52); width: 30px; height: 30px;"></i>  
-                </div>
-                <div class="experiment-content">
-                    <h3>Debt Mutual Funds</h3>
-                    <p>Invest in government bonds, corporate bonds, treasury bills, etc.
-                    <br>
-                    Lower risk, more stable than equity
-                    <br>
-                    Good for short-term goals, emergency funds, stability</p>
-                </div>
-            </div>
-
-            <div class="experiment-item" onclick="openLink('https://groww.in/mutual-funds/other-schemes/index-funds')">
-                <div class="experiment-icon emerald-hill-icon">
-                <script>
-                    import { createIcons, banknoteArrowUp } from 'lucide';
-
-                    createIcons({
-                    icons: {
-                        banknoteArrowUp
-                    }
-                    });
-                </script>
-
-                <i data-lucide="banknote-arrow-up" style="color: seagreen; width: 30px; height: 30px;"></i>  
-                </div>
-                <div class="experiment-content">
-                    <h3>Index Funds</h3>
-                    <p>Track market indices like Nifty 50, Sensex
-                    <br>
-                    Very low cost
-                    <br>
-                    No active stock picking — they mirror the index
-                    <br>
-                    Safer and more predictable over long term</p>
-                </div>
-            </div>
-        </section>
+            <i
+              data-lucide="banknote-arrow-up"
+              style="color: seagreen; width: 30px; height: 30px"
+            ></i>
+          </div>
+          <div class="experiment-content">
+            <h3>Index Funds</h3>
+            <p>
+              Track market indices like Nifty 50, Sensex
+              <br />
+              Very low cost
+              <br />
+              No active stock picking — they mirror the index
+              <br />
+              Safer and more predictable over long term
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- Expanded Project Views -->
     <div id="smiling-mind-expanded" class="expanded-view smiling-mind">
-        <button class="back-arrow" onclick="closeExpanded()">←</button>
-        <div class="expanded-content">
-            <div class="project-info">
-                <h1 class="project-title">Power of Compounding (The real magic only early starters get)</h1>
-                <p class="project-description">
-                    When you invest early, your money earns returns… and then those returns themselves start earning returns.
-                    This creates an exponential growth curve.<br>
-                    Even small amounts (₹500–₹1,000 per month) can grow into lakhs or crores over long periods.<br>
+      <button class="back-arrow" onclick="closeExpanded()">←</button>
+      <div class="expanded-content">
+        <div class="project-info">
+          <h1
+            class="project-title"
+            style="font-family: Georgia, 'Times New Roman', Times, serif"
+          >
+            Power of Compounding (The real magic only early starters get)
+          </h1>
+          <p class="project-description">
+            When you invest early, your money earns returns… and then those
+            returns themselves start earning returns. This creates an
+            exponential growth curve.<br />
+            Even small amounts (₹500–₹1,000 per month) can grow into lakhs or
+            crores over long periods.<br />
 
-                    Example:<br>
-                    Investing ₹3,000/month from age 20 vs 30:<br>
+            Example:<br />
+            Investing ₹3,000/month from age 20 vs 30:<br />
 
-                    Start at 20 → You invest 10 years more → Final amount becomes 2–3× higher, even though investment per month is same.<br>
-                    The secret? Time, not the amount.
-                </p>
-            </div>
-            <div class="project-visual">
-                <script>
-                    import { createIcons, chartNoAxesCombined } from 'lucide';
-
-                    createIcons({
-                    icons: {
-                        chartNoAxesCombined
-                    }
-                    });
-                    </script>
-
-                    <i data-lucide="chart-no-axes-combined" style="color: seagreen; width: 200px; height: 200px;"></i>  
-                Wealth Explosion
-            </div>
+            Start at 20 → You invest 10 years more → Final amount becomes 2–3×
+            higher, even though investment per month is same.<br />
+            The secret? Time, not the amount.
+          </p>
         </div>
+        <div class="project-visual">
+          <script>
+            import { createIcons, chartNoAxesCombined } from "lucide";
+
+            createIcons({
+              icons: {
+                chartNoAxesCombined,
+              },
+            });
+          </script>
+
+          <i
+            data-lucide="chart-no-axes-combined"
+            style="color: seagreen; width: 200px; height: 200px"
+          ></i>
+          Wealth Explosion
+        </div>
+      </div>
     </div>
 
     <div id="mass-studio-expanded" class="expanded-view mass-studio">
-        <button class="back-arrow" onclick="closeExpanded()">←</button>
-        <div class="expanded-content">
-            <div class="project-info">
-                <h1 class="project-title">Lower Financial Pressure Later in Life</h1>
-                <p class="project-description">
-                    Early investments reduce stress when you’re older.<br>
-                    When you start late, you have to invest bigger amounts to reach the same goal.
-                    But when you start early, compounding works for you, so you can invest small amounts comfortably.<br><br>
+      <button class="back-arrow" onclick="closeExpanded()">←</button>
+      <div class="expanded-content">
+        <div class="project-info">
+          <h1
+            class="project-title"
+            style="font-family: Georgia, 'Times New Roman', Times, serif"
+          >
+            Lower Financial Pressure Later in Life
+          </h1>
+          <p class="project-description">
+            Early investments reduce stress when you’re older.<br />
+            When you start late, you have to invest bigger amounts to reach the
+            same goal. But when you start early, compounding works for you, so
+            you can invest small amounts comfortably.<br /><br />
 
-                    You also build:<br>
+            You also build:<br />
 
-                    Emergency corpus<br>
+            Emergency corpus<br />
 
-                    Funds for higher studies<br>
+            Funds for higher studies<br />
 
-                    Funds for buying a house, marriage, etc.<br>
-                    without feeling overwhelmed.
-                </p>
-            </div>
-            <div class="project-visual">
-                <script>
-                import { createIcons, shield } from 'lucide';
-
-                createIcons({
-                icons: {
-                    shield
-                }
-                });
-                </script>
-
-                <i data-lucide="shield" style="color: magenta; width: 200px; height: 200px;"></i>  
-                    Safety Net</div>
+            Funds for buying a house, marriage, etc.<br />
+            without feeling overwhelmed.
+          </p>
         </div>
+        <div class="project-visual">
+          <script>
+            import { createIcons, shield } from "lucide";
+
+            createIcons({
+              icons: {
+                shield,
+              },
+            });
+          </script>
+
+          <i
+            data-lucide="shield"
+            style="color: magenta; width: 200px; height: 200px"
+          ></i>
+          Safety Net
+        </div>
+      </div>
     </div>
 
     <div id="soccer-tool-expanded" class="expanded-view soccer-tool">
-        <button class="back-arrow" onclick="closeExpanded()">←</button>
-        <div class="expanded-content">
-            <div class="project-info">
-                <h1 class="project-title">Professional Fund Management (Experts handle everything for you)</h1>
-                <p class="project-description">
-                    Mutual funds are managed by highly qualified fund managers and research teams who:<br>
+      <button class="back-arrow" onclick="closeExpanded()">←</button>
+      <div class="expanded-content">
+        <div class="project-info">
+          <h1
+            class="project-title"
+            style="font-family: Georgia, 'Times New Roman', Times, serif"
+          >
+            Professional Fund Management (Experts handle everything for you)
+          </h1>
+          <p class="project-description">
+            Mutual funds are managed by highly qualified fund managers and
+            research teams who:<br />
 
-                    Study the market<br>
+            Study the market<br />
 
-                    Do sector analysis<br>
+            Do sector analysis<br />
 
-                    Pick stocks/bonds<br>
+            Pick stocks/bonds<br />
 
-                    Manage risks<br>
+            Manage risks<br />
 
-                    Rebalance as needed<br>
+            Rebalance as needed<br /><br />
 
-                    This means you don’t need to be a stock market expert.<br>
-                    Your job: just invest consistently.<br>
-                </p>
-            </div>
-            <div class="project-visual">
-                <script>
-                    import { createIcons, userStar } from 'lucide';
-
-                    createIcons({
-                    icons: {
-                        userStar
-                    }
-                    });
-                    </script>
-
-                    <i data-lucide="user-star" style="color: maroon; width: 200px; height: 200px;"></i>  
-                Experienced Managers</div>
+            This means you don’t need to be a stock market expert.<br />
+            Your job: just invest consistently.<br />
+          </p>
         </div>
+        <div class="project-visual">
+          <script>
+            import { createIcons, userStar } from "lucide";
+
+            createIcons({
+              icons: {
+                userStar,
+              },
+            });
+          </script>
+
+          <i
+            data-lucide="user-star"
+            style="color: maroon; width: 200px; height: 200px"
+          ></i>
+          Experienced Managers
+        </div>
+      </div>
     </div>
 
     <div id="fenton-expanded" class="expanded-view fenton">
-        <button class="back-arrow" onclick="closeExpanded()">←</button>
-        <div class="expanded-content">
-            <div class="project-info">
-                <h1 class="project-title">Diversification Reduces Risk</h1>
-                <p class="project-description">
-                    If you invest in a single stock, and that stock crashes → your money crashes.<br>
-                    Mutual funds spread your money across many:<br>
+      <button class="back-arrow" onclick="closeExpanded()">←</button>
+      <div class="expanded-content">
+        <div class="project-info">
+          <h1
+            class="project-title"
+            style="font-family: Georgia, 'Times New Roman', Times, serif"
+          >
+            Diversification Reduces Risk
+          </h1>
+          <p class="project-description">
+            If you invest in a single stock, and that stock crashes → your money
+            crashes.<br />
+            Mutual funds spread your money across many:<br />
 
-                    Companies<br>
+            Companies<br />
 
-                    Sectors<br>
+            Sectors<br />
 
-                    Industries<br>
+            Industries<br />
 
-                    Sometimes even countries<br>
+            Sometimes even countries<br />
 
-                    This reduces the impact of any one company performing badly.<br>
-                    Essentially: higher stability, lower risk, smoother returns.<br>
-                </p>
-            </div>
-            <div class="project-visual"> 
-                <script>
-                    import { createIcons, chartSpline } from 'lucide';
-
-                    createIcons({
-                    icons: {
-                        chartSpline
-                    }
-                    });
-                    </script>
-
-                    <i data-lucide="chart-spline" style="color: rgb(2, 171, 249); width: 200px; height: 200px;"></i>
-                Diversified Risks</div>
+            This reduces the impact of any one company performing badly.<br />
+            Essentially: higher stability, lower risk, smoother returns.<br />
+          </p>
         </div>
+        <div class="project-visual">
+          <script>
+            import { createIcons, chartSpline } from "lucide";
+
+            createIcons({
+              icons: {
+                chartSpline,
+              },
+            });
+          </script>
+
+          <i
+            data-lucide="chart-spline"
+            style="color: rgb(2, 171, 249); width: 200px; height: 200px"
+          ></i>
+          Diversified Risks
+        </div>
+      </div>
     </div>
 
     <script>
-        function openLink(url) {
-            window.open(url, '_blank');
-        }
+      function openLink(url) {
+        window.open(url, "_blank");
+      }
 
-        function expandProject(projectId) {
-            // Hide main content
-            document.querySelector('.container').style.display = 'none';
-            
-            // Show expanded view
-            const expandedView = document.getElementById(projectId + '-expanded');
-            expandedView.classList.add('active');
-            
-            // Set background color
-            const colors = {
-                'smiling-mind': '#f5f5f5',
-                'mass-studio': '#2a2a2a',
-                'soccer-tool': '#7dd3c0',
-                'fenton': '#f4e04d'
-            };
-            
-            expandedView.style.backgroundColor = colors[projectId];
-        }
+      let isAnimating = false;
 
-        function closeExpanded() {
-            // Hide all expanded views
-            const expandedViews = document.querySelectorAll('.expanded-view');
-            expandedViews.forEach(view => {
-                view.classList.remove('active');
-            });
-            
-            // Show main content
-            document.querySelector('.container').style.display = 'block';
-            
-            // Reset body background
-            document.body.style.backgroundColor = '#242424';
-        }
+      function expandProject(projectId) {
+        if (isAnimating) return;
+        isAnimating = true;
 
-        // Add keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeExpanded();
-            }
+        // Get the clicked sticker
+        const clickedSticker = event.target.closest(".sticker-card");
+        const stickerRect = clickedSticker.getBoundingClientRect();
+        const container = document.querySelector(".container");
+
+        // Add animating class to container
+        container.classList.add("animating");
+
+        // Create a clone of the sticker for animation
+        const stickerClone = clickedSticker.cloneNode(true);
+        stickerClone.style.position = "fixed";
+        stickerClone.style.top = stickerRect.top + "px";
+        stickerClone.style.left = stickerRect.left + "px";
+        stickerClone.style.width = stickerRect.width + "px";
+        stickerClone.style.height = stickerRect.height + "px";
+        stickerClone.style.zIndex = "1000";
+        stickerClone.style.margin = "0";
+        stickerClone.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+        stickerClone.classList.add("expanding");
+
+        // Hide original sticker and add clone
+        clickedSticker.style.visibility = "hidden";
+        document.body.appendChild(stickerClone);
+
+        // Start expansion animation
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            stickerClone.style.top = "0px";
+            stickerClone.style.left = "0px";
+            stickerClone.style.width = "100vw";
+            stickerClone.style.height = "100vh";
+            stickerClone.style.borderRadius = "0px";
+          });
         });
+
+        // After animation completes, show expanded view
+        setTimeout(() => {
+          // Hide main content
+          container.style.display = "none";
+          container.classList.remove("animating");
+
+          // Remove clone
+          if (document.body.contains(stickerClone)) {
+            document.body.removeChild(stickerClone);
+          }
+
+          // Show expanded view
+          const expandedView = document.getElementById(projectId + "-expanded");
+          expandedView.classList.add("active");
+
+          // Set background colors
+          const colors = {
+            "smiling-mind": "#f5f5f5",
+            "mass-studio": "cyan",
+            "soccer-tool": "#7dd3c0",
+            fenton: "#f4e04d",
+          };
+
+          expandedView.style.backgroundColor = colors[projectId];
+          isAnimating = false;
+        }, 650);
+      }
+
+      function closeExpanded() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        // Get current expanded view
+        const activeExpanded = document.querySelector(".expanded-view.active");
+        if (!activeExpanded) return;
+
+        // Create reverse animation
+        const expandedRect = activeExpanded.getBoundingClientRect();
+        const reverseClone = document.createElement("div");
+        reverseClone.style.position = "fixed";
+        reverseClone.style.top = "0px";
+        reverseClone.style.left = "0px";
+        reverseClone.style.width = "100vw";
+        reverseClone.style.height = "100vh";
+        reverseClone.style.backgroundColor =
+          activeExpanded.style.backgroundColor;
+        reverseClone.style.zIndex = "1000";
+        reverseClone.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+
+        document.body.appendChild(reverseClone);
+
+        // Hide expanded view
+        activeExpanded.classList.remove("active");
+
+        // Start reverse animation
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            reverseClone.style.width = "250px";
+            reverseClone.style.height = "300px";
+            reverseClone.style.top = "50vh";
+            reverseClone.style.left = "50vw";
+            reverseClone.style.transform = "translate(-50%, -50%)";
+            reverseClone.style.borderRadius = "12px";
+            reverseClone.style.opacity = "0";
+          });
+        });
+
+        // Show main content after animation
+        setTimeout(() => {
+          document.querySelector(".container").style.display = "block";
+
+          // Reset original sticker visibility
+          const stickers = document.querySelectorAll(".sticker-card");
+          stickers.forEach((sticker) => {
+            sticker.style.visibility = "visible";
+            sticker.style.opacity = "1";
+          });
+
+          // Remove reverse clone
+          if (document.body.contains(reverseClone)) {
+            document.body.removeChild(reverseClone);
+          }
+
+          isAnimating = false;
+        }, 550);
+      }
+
+      // Add keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeExpanded();
+        }
+      });
     </script>
     <script>
-        lucide.createIcons();
+      lucide.createIcons();
     </script>
-</body>
-
+  </body>
 </html>
-
