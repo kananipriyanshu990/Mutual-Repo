@@ -28,7 +28,7 @@
 
       /* Header Styles */
       .header {
-        text-align: center;
+        text-align: left;
         margin-bottom: 4rem;
       }
 
@@ -43,12 +43,12 @@
         font-size: 1.2rem;
         color: #cccccc;
         max-width: 600px;
-        margin: 0 auto 2rem;
+        margin: 0 0 2rem 0;
       }
 
       .social-links {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 1.5rem;
         margin-top: 2rem;
       }
@@ -61,12 +61,30 @@
         padding: 0.75rem;
         border-radius: 8px;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .social-icon:hover::before {
+        left: 100%;
       }
 
       .social-icon:hover {
         color: #7dd3c0;
         transform: translateY(-2px);
         background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 15px rgba(125, 211, 192, 0.3);
       }
 
       /* Work Section */
@@ -78,6 +96,7 @@
         font-size: 2rem;
         margin-bottom: 2rem;
         color: #ffffff;
+        text-align: left;
       }
 
       .sticker-grid {
@@ -98,9 +117,28 @@
         justify-content: center;
         font-weight: bold;
         font-size: 1.2rem;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         position: relative;
         overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .sticker-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+      }
+
+      .sticker-card > * {
+        position: relative;
+        z-index: 2;
       }
 
       .sticker-card:hover {
@@ -112,7 +150,7 @@
       .sticker-card.expanding {
         position: fixed;
         z-index: 1000;
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         transform: translateY(0);
         box-shadow: none;
       }
@@ -127,23 +165,27 @@
       }
 
       .smiling-mind {
-        background-color: #f5f5f5;
-        color: #000;
+        background-image: url('https://unsplash.com/photos/financial-chart-and-rising-graph-with-lines-and-numbers-and-bar-diagrams-that-illustrate-stock-market-behaviour-concept-of-successful-trading-dark-blue-background-3d-rendering-AM3wYIikxO4');
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       }
 
       .mass-studio {
-        background-color: cyan;
-        color: #000;
+        background-image: url('https://unsplash.com/photos/a-glass-jar-filled-with-coins-and-a-plant-joqWSI9u_XM');
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       }
 
       .soccer-tool {
-        background-color: #7dd3c0;
-        color: #000;
+        background-image: url('https://unsplash.com/photos/over-the-shoulder-view-of-and-stock-broker-trading-online-while-accepting-orders-by-phone-multiple-computer-screens-ful-of-charts-and-data-analyses-in-background-O5COka19in4');
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       }
 
       .fenton {
-        background-color: #f4e04d;
-        color: #000;
+        background-image: url('https://unsplash.com/photos/green-orange-and-blue-plastic-tube--FNXFmcyEZs');
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       }
 
       /* Experiments Section */
@@ -259,6 +301,7 @@
 
       .project-info {
         padding: 2rem;
+        text-align: left;
       }
 
       .project-title {
@@ -266,6 +309,7 @@
         font-weight: 700;
         margin-bottom: 2rem;
         color: #333;
+        text-align: left;
       }
 
       .project-description {
@@ -273,6 +317,7 @@
         line-height: 1.6;
         margin-bottom: 2rem;
         color: #555;
+        text-align: left;
       }
 
       .tech-list {
@@ -761,7 +806,7 @@
         stickerClone.style.height = stickerRect.height + "px";
         stickerClone.style.zIndex = "1000";
         stickerClone.style.margin = "0";
-        stickerClone.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+        stickerClone.style.transition = "all 0.8s cubic-bezier(0.23, 1, 0.32, 1)";
         stickerClone.classList.add("expanding");
 
         // Hide original sticker and add clone
@@ -804,7 +849,7 @@
 
           expandedView.style.backgroundColor = colors[projectId];
           isAnimating = false;
-        }, 650);
+        }, 750);
       }
 
       function closeExpanded() {
@@ -826,7 +871,7 @@
         reverseClone.style.backgroundColor =
           activeExpanded.style.backgroundColor;
         reverseClone.style.zIndex = "1000";
-        reverseClone.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+        reverseClone.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
 
         document.body.appendChild(reverseClone);
 
@@ -863,7 +908,7 @@
           }
 
           isAnimating = false;
-        }, 550);
+        }, 650);
       }
 
       // Add keyboard navigation
