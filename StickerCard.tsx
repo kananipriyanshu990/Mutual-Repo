@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Project } from '../types';
 import './StickerCard.css';
+import LazyImage from './LazyImage';
 
 interface StickerCardProps {
   project: Project;
@@ -12,6 +13,8 @@ const StickerCard: React.FC<StickerCardProps> = ({ project, onClick }) => {
   const handleClick = () => {
     onClick(project.id);
   };
+
+  const imgUrl = project.expandedContent?.images?.[0] ?? null;
 
   const renderLogo = () => {
     switch (project.id) {
@@ -60,12 +63,16 @@ const StickerCard: React.FC<StickerCardProps> = ({ project, onClick }) => {
   return (
     <motion.div 
       layoutId={`card-${project.id}`}
-      className={`sticker-card ${project.id}`}
+      className={`sticker-card ${project.id} ${imgUrl ? 'has-image' : ''}`}
       style={{ backgroundColor: project.backgroundColor }}
       onClick={handleClick}
       data-project-id={project.id}
       whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)" }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      transition={{
+        // smoother layout transition to reduce abrupt ending
+        layout: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+        default: { duration: 0.35, ease: 'easeOut' }
+      }}
       role="button"
       tabIndex={0}
       aria-label={`View ${project.title} project details`}
@@ -76,13 +83,18 @@ const StickerCard: React.FC<StickerCardProps> = ({ project, onClick }) => {
         }
       }}
     >
+      {imgUrl && (
+        <div className="sticker-image">
+          <LazyImage src={imgUrl} alt={`${project.title} image`} className="card-image" />
+        </div>
+      )}
       <div className="sticker-content">
-        {renderLogo()}
+        <div className="sticker-text">
+          {renderLogo()}
+        </div>
       </div>
     </motion.div>
   );
 };
 
-
 export default StickerCard;
-
