@@ -30,7 +30,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.18; /* subtle background image */
+  opacity: 0; /* subtle background image */
   filter: saturate(0.9) contrast(0.95);
 }
 
@@ -50,7 +50,7 @@
 .sticker-text {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 8px;
 }
@@ -70,7 +70,7 @@
   height: 100vh;
   z-index: 1000;
   border-radius: 0;
-  animation: expandSticker 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: expandSticker 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   pointer-events: none;
 }
 
@@ -103,7 +103,7 @@
 
 /* collapse animation also lengthened and softened */
 .expanded-view.collapsing {
-  animation: collapseSticker 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: collapseSticker 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes collapseSticker {

@@ -14,7 +14,7 @@
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
           sans-serif;
-        background-color: #242424;
+        background-color: #343535;
         color: #ffffff;
         line-height: 1.5;
         min-height: 100vh;
@@ -84,7 +84,7 @@
         color: #7dd3c0;
         transform: translateY(-2px);
         background-color: rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 15px rgba(125, 211, 192, 0.3);
+        box-shadow: 0px 0px 100px rgb(246, 254, 7);
       }
 
       /* Work Section */
@@ -123,6 +123,7 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        text-align: center;
       }
 
       .sticker-card::before {
@@ -143,14 +144,14 @@
 
       .sticker-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 0px 50px rgb(246, 254, 251);
       }
 
       /* Expansion Animation */
       .sticker-card.expanding {
         position: fixed;
         z-index: 1000;
-        transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
         transform: translateY(0);
         box-shadow: none;
       }
@@ -165,33 +166,33 @@
       }
 
       .smiling-mind {
-        background-image: url('https://unsplash.com/photos/financial-chart-and-rising-graph-with-lines-and-numbers-and-bar-diagrams-that-illustrate-stock-market-behaviour-concept-of-successful-trading-dark-blue-background-3d-rendering-AM3wYIikxO4');
-        color: #fff;
+        background-image: url('https://static.vecteezy.com/system/resources/previews/022/144/287/large_2x/growth-strategy-business-graph-analysis-concept-on-finance-chart-data-diagram-3d-background-wallpaper-ai-generated-photo.jpg');
+        color: #ffffff;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       }
 
       .mass-studio {
-        background-image: url('https://unsplash.com/photos/a-glass-jar-filled-with-coins-and-a-plant-joqWSI9u_XM');
-        color: #fff;
+        background-image: url('https://static.vecteezy.com/system/resources/previews/021/747/197/large_2x/money-growing-and-natural-light-with-financial-ideas-with-generative-ai-photo.jpg');
+        color: #ffffff;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       }
 
       .soccer-tool {
-        background-image: url('https://unsplash.com/photos/over-the-shoulder-view-of-and-stock-broker-trading-online-while-accepting-orders-by-phone-multiple-computer-screens-ful-of-charts-and-data-analyses-in-background-O5COka19in4');
-        color: #fff;
+        background-image: url('https://www.thistleinitiatives.co.uk/hubfs/iStock-1319831113.jpg#keepProtocol');
+        color: #ffffff;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       }
 
       .fenton {
-        background-image: url('https://unsplash.com/photos/green-orange-and-blue-plastic-tube--FNXFmcyEZs');
-        color: #fff;
+        background-image: url('https://facts.net/wp-content/uploads/2024/09/27-facts-about-diversification-1726716127.jpg');
+        color: #ffffff;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       }
 
       /* Experiments Section */
       .experiments-section {
         max-width: 800px;
-        margin: 0 auto;
+        margin: 0 0 0 0;
       }
 
       .experiment-item {
@@ -344,6 +345,54 @@
         color: #666;
       }
 
+      /* Specific expanded view styling */
+      #smiling-mind-expanded .project-title,
+      #smiling-mind-expanded .project-description {
+        color: #ffffff !important;
+      }
+
+      #smiling-mind-expanded .back-arrow {
+        color: #ffffff !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+      }
+
+      #smiling-mind-expanded .back-arrow:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+
+      #mass-studio-expanded .project-title,
+      #mass-studio-expanded .project-description {
+        color: #ffffff !important;
+      }
+
+      #soccer-tool-expanded .project-title,
+      #soccer-tool-expanded .project-description {
+        color: #ffffff !important;
+      }
+
+      #soccer-tool-expanded .back-arrow {
+        color: #ffffff !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+      }
+
+      #soccer-tool-expanded .back-arrow:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+
+      #fenton-expanded .project-title,
+      #fenton-expanded .project-description {
+        color: #000000 !important;
+      }
+
+      #fenton-expanded .back-arrow {
+        color: #000000 !important;
+        background: rgba(0, 0, 0, 0.1) !important;
+      }
+
+      #fenton-expanded .back-arrow:hover {
+        background: rgba(0, 0, 0, 0.2) !important;
+      }
+
       /* Responsive Design */
       @media (max-width: 768px) {
         .developer-name {
@@ -459,7 +508,7 @@
 
       <!-- Work Section -->
       <section class="work-section">
-        <h2 class="section-title">Mutual Fund Types</h2>
+        <h2 class="section-title">Appliactions of Investing Early</h2>
         <div class="sticker-grid">
           <div
             class="sticker-card smiling-mind"
@@ -630,9 +679,8 @@
 
           <i
             data-lucide="chart-no-axes-combined"
-            style="color: seagreen; width: 200px; height: 200px"
+            style="color: rgb(0, 255, 110); width: 400px; height: 400px"
           ></i>
-          Wealth Explosion
         </div>
       </div>
     </div>
@@ -676,9 +724,8 @@
 
           <i
             data-lucide="shield"
-            style="color: magenta; width: 200px; height: 200px"
+            style="color: rgb(1, 230, 255); width: 400px; height: 400px"
           ></i>
-          Safety Net
         </div>
       </div>
     </div>
@@ -724,9 +771,8 @@
 
           <i
             data-lucide="user-star"
-            style="color: maroon; width: 200px; height: 200px"
+            style="color: rgb(255, 0, 251); width: 400px; height: 400px"
           ></i>
-          Experienced Managers
         </div>
       </div>
     </div>
@@ -771,9 +817,8 @@
 
           <i
             data-lucide="chart-spline"
-            style="color: rgb(2, 171, 249); width: 200px; height: 200px"
+            style="color: rgb(0, 2, 2); width: 400px; height: 400px"
           ></i>
-          Diversified Risks
         </div>
       </div>
     </div>
@@ -807,6 +852,8 @@
         stickerClone.style.zIndex = "1000";
         stickerClone.style.margin = "0";
         stickerClone.style.transition = "all 0.8s cubic-bezier(0.23, 1, 0.32, 1)";
+        stickerClone.style.backgroundSize = "cover";
+        stickerClone.style.backgroundPosition = "center";
         stickerClone.classList.add("expanding");
 
         // Hide original sticker and add clone
@@ -821,6 +868,8 @@
             stickerClone.style.width = "100vw";
             stickerClone.style.height = "100vh";
             stickerClone.style.borderRadius = "0px";
+            stickerClone.style.backgroundSize = "cover";
+            stickerClone.style.backgroundPosition = "center";
           });
         });
 
@@ -839,7 +888,7 @@
           const expandedView = document.getElementById(projectId + "-expanded");
           expandedView.classList.add("active");
 
-          // Set background colors
+          // Set background colors and images
           const colors = {
             "smiling-mind": "#f5f5f5",
             "mass-studio": "cyan",
@@ -847,7 +896,18 @@
             fenton: "#f4e04d",
           };
 
+          const backgroundImages = {
+            "smiling-mind": "url('https://static.vecteezy.com/system/resources/previews/022/144/287/large_2x/growth-strategy-business-graph-analysis-concept-on-finance-chart-data-diagram-3d-background-wallpaper-ai-generated-photo.jpg')",
+            "mass-studio": "url('https://static.vecteezy.com/system/resources/previews/021/747/197/large_2x/money-growing-and-natural-light-with-financial-ideas-with-generative-ai-photo.jpg')",
+            "soccer-tool": "url('https://www.thistleinitiatives.co.uk/hubfs/iStock-1319831113.jpg#keepProtocol')",
+            "fenton": "url('https://facts.net/wp-content/uploads/2024/09/27-facts-about-diversification-1726716127.jpg')"
+          };
+
           expandedView.style.backgroundColor = colors[projectId];
+          expandedView.style.backgroundImage = backgroundImages[projectId];
+          expandedView.style.backgroundSize = "cover";
+          expandedView.style.backgroundPosition = "center";
+          expandedView.style.backgroundRepeat = "no-repeat";
           isAnimating = false;
         }, 750);
       }
@@ -860,16 +920,21 @@
         const activeExpanded = document.querySelector(".expanded-view.active");
         if (!activeExpanded) return;
 
-        // Create reverse animation
-        const expandedRect = activeExpanded.getBoundingClientRect();
+        // Get the project ID from the expanded view
+        const projectId = activeExpanded.id.replace("-expanded", "");
+
+        // Create reverse animation with background image
         const reverseClone = document.createElement("div");
         reverseClone.style.position = "fixed";
         reverseClone.style.top = "0px";
         reverseClone.style.left = "0px";
         reverseClone.style.width = "100vw";
         reverseClone.style.height = "100vh";
-        reverseClone.style.backgroundColor =
-          activeExpanded.style.backgroundColor;
+        reverseClone.style.backgroundColor = activeExpanded.style.backgroundColor;
+        reverseClone.style.backgroundImage = activeExpanded.style.backgroundImage;
+        reverseClone.style.backgroundSize = "cover";
+        reverseClone.style.backgroundPosition = "center";
+        reverseClone.style.backgroundRepeat = "no-repeat";
         reverseClone.style.zIndex = "1000";
         reverseClone.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
 
@@ -888,6 +953,8 @@
             reverseClone.style.transform = "translate(-50%, -50%)";
             reverseClone.style.borderRadius = "12px";
             reverseClone.style.opacity = "0";
+            reverseClone.style.backgroundSize = "cover";
+            reverseClone.style.backgroundPosition = "center";
           });
         });
 
