@@ -125,7 +125,8 @@ const ExpandedProjectView: React.FC<ExpandedProjectViewProps> = ({ project, onBa
               borderRadius: "0px",
               marginBottom: "2rem"
             }}
-            transition={{ duration: 0.45, ease: "easeInOut" }}
+            // increase layout transition duration and use a gentle easing curve
+            transition={{ layout: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }}
           >
             <h1 className="project-title">{project.expandedContent.description.split('.')[0]}</h1>
           </motion.div>
@@ -168,32 +169,16 @@ const ExpandedProjectView: React.FC<ExpandedProjectViewProps> = ({ project, onBa
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              {project.expandedContent.links.map((link, index) => (
-                <motion.a 
-                  key={index} 
-                  href={link.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="project-link"
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.9 + index * 0.1 }}
-                  whileHover={{ x: 4 }}
-                >
-                  {link.text}
-                </motion.a>
+              {project.expandedContent.links.map((link, idx) => (
+                <a key={idx} className="project-link" href={link.url} target="_blank" rel="noreferrer">{link.text}</a>
               ))}
             </motion.div>
           )}
         </motion.div>
 
-        <motion.div
-          initial={{ x: 40, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-        >
+        <div className="project-visual-area">
           {renderProjectContent()}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -6,17 +6,62 @@
   position: relative;
   overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start; /* left align card contents */
+  justify-content: flex-start;
   z-index: 1;
   outline: none;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
+/* when image present, allow it as subtle background */
+.sticker-card .sticker-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sticker-card .sticker-image .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.18; /* subtle background image */
+  filter: saturate(0.9) contrast(0.95);
+}
+
+/* ensure content sits above image */
+.sticker-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  z-index: 1;
+  position: relative;
+}
+
+/* support a left-aligned text wrapper for logos/titles */
+.sticker-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* focus visible state */
 .sticker-card:focus-visible {
   outline: 2px solid #7dd3c0;
   outline-offset: 4px;
 }
 
+/* smoother expand/collapse animations; increased duration and softer easing */
 .sticker-card.expanding {
   position: fixed;
   top: 0;
@@ -25,7 +70,7 @@
   height: 100vh;
   z-index: 1000;
   border-radius: 0;
-  animation: expandSticker 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: expandSticker 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   pointer-events: none;
 }
 
@@ -56,8 +101,9 @@
   }
 }
 
+/* collapse animation also lengthened and softened */
 .expanded-view.collapsing {
-  animation: collapseSticker 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: collapseSticker 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes collapseSticker {
@@ -66,24 +112,16 @@
     opacity: 1;
   }
   100% {
-    transform: scale(0.8);
+    transform: scale(0.88);
     opacity: 0;
   }
 }
 
-.sticker-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-}
-
 .logo {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: inherit;
 }
 
 .smiling-mind-logo {
@@ -103,13 +141,13 @@
 }
 
 .logo-placeholder {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   color: #333;
-  text-align: center;
+  text-align: left;
 }
 
-/* Specific project styling */
+/* Specific project styling (kept for visual identity) */
 .sticker-card.smiling-mind {
   background-color: #f5f5f5;
 }
@@ -126,7 +164,7 @@
   background-color: #C86EE9;
 }
 
-/* Responsive design */
+/* Responsive */
 @media (max-width: 768px) {
   .sticker-card {
     width: 200px;
@@ -134,7 +172,7 @@
   }
   
   .sticker-content {
-    padding: 1.5rem;
+    padding: 0.75rem;
   }
 }
 
@@ -145,16 +183,10 @@
   }
   
   .sticker-content {
-    padding: 1rem;
+    padding: 0.5rem;
   }
   
   .logo svg {
     width: 80px;
-    height: 40px;
   }
-  
-  .fenton-logo text {
-    font-size: 18px;
-  }
-
 }

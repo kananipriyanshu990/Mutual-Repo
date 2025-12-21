@@ -1,21 +1,24 @@
 .header {
   width: 100%;
   padding: 2rem 0;
-  text-align: center;
+  /* left-align site header */
+  text-align: left;
 }
 
 .header-content {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0; /* move to left */
   padding: 0 2rem;
 }
 
+/* left align developer name and tagline */
 .developer-name {
   font-size: 3.5rem;
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 1rem;
   line-height: 1.1;
+  text-align: left;
 }
 
 .tagline {
@@ -24,36 +27,44 @@
   margin-bottom: 2rem;
   line-height: 1.5;
   max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
 }
 
+/* align the social icons to the left and refine hover */
 .social-links {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1.5rem;
   margin-top: 2rem;
+  align-items: center;
 }
 
+/* social icon base */
 .social-icon {
   background: none;
   border: none;
   color: #ffffff;
   cursor: pointer;
   padding: 0.75rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  border-radius: 10px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s;
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform, box-shadow, background;
 }
 
+/* stronger, smoother hover like the reference site */
 .social-icon:hover {
-  color: #7dd3c0;
-  transform: translateY(-2px);
-  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: translateY(-4px) scale(1.05);
+  background: linear-gradient(135deg, rgba(125,211,192,0.12), rgba(255,255,255,0.03));
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 
+/* preserve click state */
 .social-icon:active {
   transform: translateY(0);
 }
@@ -63,7 +74,7 @@
   height: 24px;
 }
 
-/* Responsive design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .developer-name {
     font-size: 2.5rem;
@@ -75,6 +86,7 @@
   
   .social-links {
     gap: 1rem;
+    justify-content: flex-start;
   }
   
   .social-icon {
